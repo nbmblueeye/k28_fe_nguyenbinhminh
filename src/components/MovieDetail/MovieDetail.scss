@@ -1,0 +1,25 @@
+@import "../../common/color.scss";
+
+.movie-section{
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0;
+    color: $secondary-color;
+    font-weight: 400;
+}
+
+.section-left{
+    max-width: 500px;
+}
+
+.movie-title{
+    font-size: 40px;
+}
+
+.fa-calendar-days{
+ color: gray
+}
+
+.section-right{
+    margin-left: 30px;
+}

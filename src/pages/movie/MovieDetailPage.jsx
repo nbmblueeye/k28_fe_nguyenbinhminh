@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchAsyncMovie, getMovie, removeMovie } from "../../redux/movies/movieSlider";
-import { useEffect } from "react";
+import { useEffect, useRef, } from "react";
 import { Spin, notification } from "antd"
 import NOTIFICATION_TYPE from '../../constants';
 import './MovieDetailPage.scss'
 import MovieDetail from "../../components/MovieDetail/MovieDetail";
+
+import { fetchAsyncMovie, getMovie, removeMovie } from "../../redux/movies/movieSlider";
 
 const MovieDetailPage = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,6 @@ const MovieDetailPage = () => {
   const fetchMovie = async() => {
     if(localStorage.getItem("access_token") && id){
       const data = await dispatch( fetchAsyncMovie({accessToken: localStorage.getItem("access_token"), id}))
-      console.log("data in movie detail", data);
       if(data?.payload){
         notification[NOTIFICATION_TYPE.success] ({
           message: "get movie successfully",
@@ -30,31 +30,35 @@ const MovieDetailPage = () => {
     }
   }
 
+  const getData = useRef(true) 
   useEffect(() => {
-    fetchMovie()
+    if(getData.current){
+      fetchMovie()
+    }
     return () => {
       dispatch( removeMovie() )
+      getData.current = false
     }
-
   },[localStorage.getItem("access_token"), id])
   return (
-     <section>
-       <h1 className="title">Movie</h1>
+     <section className="container">
+       <h1 className="title">Movie Detail</h1>
       {
         Object.keys(movie).length === 0 ? (
           <div style={{
-            height: "100vh",
+            height: "90vh",
             display: "flex",
+            justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}>
-            <Spin/>
+            <Spin size="large"/>
           </div>
         )
         :
         (
           <>
-            <MovieDetail movie={movie}/>
+            <MovieDetail movie={movie?.movie}/>
           </>
         )
       }

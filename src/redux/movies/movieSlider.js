@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import createApi from '../../common/api';
 
 
-
 export const fetchAsyncMovies = createAsyncThunk('movie/fetchAsyncMovies', async (accessToken) => {
     try {
         const { data } = await createApi(accessToken).get("/movies");
@@ -23,7 +22,7 @@ export const fetchAsyncMovie = createAsyncThunk('movie/fetchAsyncMovie', async (
 
 export const createNewMovie = createAsyncThunk('movie/createNewMovie', async ({accessToken, newMovie}) => {
     try {
-        const { data } = await createApi(accessToken).post(`/movies`, { ...newMovie });
+        const { data } = await createApi(accessToken).post(`movies`, { ...newMovie });
         return data?.data;
     } catch (error) {
         console.log(error);
@@ -32,7 +31,7 @@ export const createNewMovie = createAsyncThunk('movie/createNewMovie', async ({a
 
 export const updateMovie = createAsyncThunk('movie/updateMovie', async ({accessToken, dataUpdate, id}) => {
     try {
-        const { data } = await createApi(accessToken).put(`/movies/${id}`, { ...dataUpdate });
+        const { data } = await createApi(accessToken).put(`movies/${id}`, { ...dataUpdate });
         return data?.data;
     } catch (error) {
         console.log(error);
@@ -55,9 +54,9 @@ const initialState = {
 }
 
 const movieSlide = createSlice({
-    name: "movies",
+    name: "movie",
     initialState,
-    redusers: {
+    reducers: {
         removeMovies: (state) => {
             state.movies = []
         },
@@ -81,8 +80,8 @@ const movieSlide = createSlice({
 
 export const { removeMovie, removeMovies } = movieSlide.actions
 
-export const getMovies = state => state.movies.movies
-export const getMovie = state => state.movies.movie
+export const getMovies = state => state.movie.movies
+export const getMovie = state => state.movie.movie
 
 export default movieSlide.reducer
 

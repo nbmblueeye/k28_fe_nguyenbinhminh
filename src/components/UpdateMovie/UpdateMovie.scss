@@ -5,7 +5,10 @@
     border-radius: 4px;
     color: white;
     cursor: pointer;
-
+    margin-left: 16px;
+    outline: none;
+    border: none;
+    box-shadow: inset;
     
     &-next{
         background-color: green;
@@ -13,5 +16,10 @@
 
     &-back{
         background-color: red;
+    }
+
+    &:hover{
+        outline: 1px solid #000000;
+        outline-offset: 2px;
     }
 }

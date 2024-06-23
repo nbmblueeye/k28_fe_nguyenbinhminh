@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import MovieCard from "../MovieCard/MovieCard"
+import "./MoveListing.scss"
 
 const MovieListing = ({movies}) => {
   
@@ -10,7 +10,7 @@ const MovieListing = ({movies}) => {
           {
             movies.map(movie => {
               return (
-                <div key={movie.id}>
+                <div key={movie._id}>
                   <MovieCard movie={movie}/>
                 </div>
               )

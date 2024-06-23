@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import createApi from '../../common/api';
 import { notification } from 'antd';
 import NOTIFICATION_TYPE from '../../constants';
+import createApi from '../../common/api';
 
-export const register = createAsyncThunk('auth/register', async (dataRegister) => {
+export const register = createAsyncThunk('auth/register', async(dataRegister) => {
     try {
-        const { data } = await createApi.post("auth/register", {
+        const { data } = await createApi().post("auth/register", {
             ...dataRegister
         })
 
@@ -13,6 +13,7 @@ export const register = createAsyncThunk('auth/register', async (dataRegister) =
             message: "Register successfully",
             placement: "topRight"
         })
+        console.log(data)
         return data?.data
     } catch (error) {
         notification[NOTIFICATION_TYPE.error] ({
@@ -24,7 +25,7 @@ export const register = createAsyncThunk('auth/register', async (dataRegister) =
 
 export const login = createAsyncThunk('auth/login', async (dataLogin) => {
     try {
-        const { data } = await createApi.post("auth/login", {
+        const { data } = await createApi().post("auth/login", {
             ...dataLogin
         })
         localStorage.setItem("access_token", data?.data.accessToken)
@@ -69,7 +70,7 @@ const authSlide = createSlice({
     extraReducers: (builder) => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.user = action.payload
-        })
+        }),
 
         builder.addCase(logout.fulfilled, (state) => {
             state.user = {}
@@ -77,7 +78,7 @@ const authSlide = createSlice({
     }
 })
 
-export const getLoggedInUser = (state )=> state.auth.user
+export const getLoggedInUser = state => state.auth.user
 export default authSlide.reducer
 
 

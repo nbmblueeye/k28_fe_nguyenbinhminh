@@ -2,14 +2,16 @@
 
 .movie-section{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 40px 0;
     color: $secondary-color;
     font-weight: 400;
+    gap: 32px;
 }
 
 .section-left{
     max-width: 500px;
+    margin-left: 30px;
 }
 
 .movie-title{
@@ -18,8 +20,4 @@
 
 .fa-calendar-days{
  color: gray
-}
-
-.section-right{
-    margin-left: 30px;
 }

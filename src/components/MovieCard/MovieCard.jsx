@@ -5,10 +5,10 @@ import './MovieCard.scss';
 
 const MovieCard = ({ movie }) => {
 
-  const { id, title, year, poster } = movie
+  const { _id, title, year, poster } = movie
 
   return (
-    <Link to={`/movies/${id}`}>
+    <Link to={`/movies/${_id}`}>
       <div className="card-item">
         <div className="card-inner">
           <div className="card-top">

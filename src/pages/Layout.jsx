@@ -33,7 +33,8 @@ const Layout = () => {
               cursor: "pointer"
             }}
               title='Home'
-              to={user?.email ? "/":"/login"} className='fa-solid fa-home'
+              to={user?.email ? "/":"/login"} 
+              className='fa-solid fa-home auth-btn'
           />
             
             { user?.email  && (<div
@@ -54,7 +55,8 @@ const Layout = () => {
                     fontSize:"18px"
                   }}
                   title='Edit movie'
-                  to='/admin' className='fa-solid fa-pen-to-square'
+                  to='/admin' 
+                  className='fa-solid fa-pen-to-square auth-btn'
                 />
               }
               <button style={{
@@ -62,11 +64,10 @@ const Layout = () => {
                 padding: "8px 12px",
                 }} 
                 title='Logout'
-                className="logout-btn" 
                 onClick={handleLogout}
-              >
-                Logout
-              </button>
+                className='fa-solid fa-right-from-bracket auth-btn'
+              />
+                
             </div>)
           }
         </div>
